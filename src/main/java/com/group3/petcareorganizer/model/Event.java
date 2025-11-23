@@ -22,6 +22,7 @@ public class Event {
         this.eventRepeat = false;
     }
 
+    // ---- SETTERS ----
     public void setName(String name) {
         this.eventName = name;
     }
@@ -42,10 +43,11 @@ public class Event {
         this.eventId = id;
     }
 
-    public boolean isBooked() {
-        return eventBooked;
+    public void endEvent() {
+        this.eventEnded = true;
     }
 
+    // ---- GETTERS ----
     public String getEventName() {
         return eventName;
     }
@@ -58,7 +60,19 @@ public class Event {
         return eventEndTime;
     }
 
-    public void endEvent() {
-        this.eventEnded = true;
+    public int getEventId() {
+        return eventId;
+    }
+
+    public boolean isBooked() {
+        return eventBooked;
+    }
+
+    public boolean isRepeating() {
+        return eventRepeat;
+    }
+
+    public boolean hasEnded() {
+        return eventEnded;
     }
 }
