@@ -1,41 +1,56 @@
 package com.group3.petcareorganizer.model;
 
-import java.util.ArrayList;
+import jakarta.persistence.*;
+
 import java.util.List;
 
+
+@Entity
+@Table
 public class Owner {
 
-    private String ownerUsername;
-    private String ownerPassword;
-    private List<Pet> pets;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+    private String username;
+    private String email;
+    private String password;
 
-    public Owner() {
-        pets = new ArrayList<>();
+    @OneToMany(mappedBy = "owner")
+    List<Pet> pets;
+
+
+    // Getters and Setters for each attribute
+    public Long getId() {
+        return id;
     }
 
-    public Owner(String username, String password) {
-        this.ownerUsername = username;
-        this.ownerPassword = password;
-        this.pets = new ArrayList<>();
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    public void setOwnerID(String id) {
-        this.ownerUsername = id;
+    public String getUsername() {
+        return username;
     }
 
-    public void setPassword(String pass) {
-        this.ownerPassword = pass;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
-    public String getOwnerUsername() {
-        return ownerUsername;
+    public String getEmail() {
+        return email;
     }
 
-    public void addPet(Pet p) {
-        pets.add(p);
+    public void setEmail(String email) {
+        this.email = email;
     }
 
-    public List<Pet> getPets() {
-        return pets;
+    public String getPassword() {
+        return password;
     }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
 }
