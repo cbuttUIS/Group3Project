@@ -16,38 +16,71 @@ import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import com.group3.petcareorganizer.service.OwnerService;
 import lombok.AllArgsConstructor;
 
+/* @AllArgsConstructor is used to create constructors with Lombok for each field in this class (
+   (OwnerService ownerService uses the Lombok constructor)
+   @Configuration means this is a configuration class that will use methods that are annotated with
+   @Bean to register Spring Beans
+   @EnableWebSecurity means this class uses Spring Security's web security, this class configures the security rules
+    for authentication and authorization
+ */
 @AllArgsConstructor
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
 
+    // ownerService will be used to get the owner's details from the database
     private final OwnerService ownerService;
 
+    /* @Bean means this method will register a Spring Bean so that Spring Security can load the owner's information
+        for authentication
+     */
     @Bean
     public UserDetailsService userDetailsService() {
         return ownerService;
     }
 
+    /* @Bean means this method registers a Spring Bean so that AuthenticationProvider from Spring security can
+        use the OwnerService and a password encoder to authenticate an owner account
+     */
     @Bean
     public AuthenticationProvider authenticationProvider() {
+
+        // Creates a new DauAuthenticationProvider object provider
         DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
+
+        // provider authenticates the user details with ownerService
         provider.setUserDetailsService(ownerService);
+
+        // provider sets the passwordEncoder object
         provider.setPasswordEncoder(passwordEncoder());
+
+        // return authentication
         return provider;
+
     }
 
+    /* @Bean means this will register a spring Bean so that passwordEncoder can use BCryptPasswordEncoder()
+        from Spring Security to securely encode and verify passwords
+     */
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
+    /* @Bean means this method registers a Spring Bean to configure the securityFilterChain for the application
+        using Spring Security
+       This method disables csrf protection, sets up the login page for authentication and redirects to the dashboard
+       after successful login.
+       The method also permits requests to static resources and defines which urls are public and which are private
+     */
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
+
                 .csrf(AbstractHttpConfigurer::disable)
                 .formLogin(form -> form
                         .loginPage("/login").permitAll()
-                        .defaultSuccessUrl("/dashboard", true) // always redirect to /index after login
+                        .defaultSuccessUrl("/dashboard", true)
                 )
                 .authorizeHttpRequests(auth -> auth
                         // Permit all requests to static resources (CSS, JS, images, etc.)
