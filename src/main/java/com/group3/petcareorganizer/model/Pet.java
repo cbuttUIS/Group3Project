@@ -10,20 +10,22 @@ import java.time.LocalDate;
 
 
 /*
-@Entity annotates that this is a model class
+@Entity means this class is the Pet model for the database
+This class uses Lombok Getters and Setters with the @Getter and @Setter annotations
  */
 @Entity
 public class Pet {
 
-    /* @Id marks this as the primary key of the entity created, primary key identifies the entity in the database
-        @GeneratedValue and GeneratedType.Identity use the database's auto increment to generate the primary key
-     */
+    // @Id means that the id field is the primary key for this pet in the database
+    //   @GeneratedValue used to create a unique value for each pet id
+    //@Getter to get id
     @Getter
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
 
+    // @Getter and @Setter to get and set petName, birthYear (YYYY), birthMonth (MM), and petType
     @Getter
     @Setter
     private String petName;
@@ -37,11 +39,12 @@ public class Pet {
     @Setter
     private String petType;
 
+    // petAge field is going to hold the pet's age after it has been calculated with getPetAge() method in Pet class
     private int petAge;
 
 
-    /* @Lob tells the database that this field can store large text
-     */
+    // @Getter and @Setter get and set healthConcerns
+    // @Lob tells the database that this field can store large text
     @Getter
     @Setter
     @Lob
@@ -55,11 +58,10 @@ public class Pet {
     @JoinColumn(name = "owner_id")
     private Owner owner;
 
-
+    // Pet constructor for creating an empty pet object, used for Adding a new pet
     public Pet() {}
 
-    /*
-        calls calcAge()
+    /* Pet constructor to return a Pet object with data in the attribute fields
      */
     public Pet(String petName, int birthYear, int birthMonth, String petType) {
         this.petName = petName;
@@ -69,16 +71,24 @@ public class Pet {
 
     }
 
+    /* getPetAge() fetches the current date with LocalDate.now(), and uses today to fetch the current year and
+        current month to calculate the pets age in years with the pet's birthYear and birthMonth
+     */
     public int getPetAge(){
         LocalDate today = LocalDate.now();
         int currentYear = today.getYear();
         int currentMonth = today.getMonthValue();
 
+        // calculate the difference between the currentYear and the pet's birthYear
         int years = currentYear - this.birthYear;
+
+        // subtract 1 from the number of years if the currentMonth is less than the pet's birthMonth, meaning the pet's
+        // birthday has not passed yet.
         if(currentMonth < this.birthMonth){
             years--;
         }
 
+        // Return the pet's age in years
         return years;
     }
 
