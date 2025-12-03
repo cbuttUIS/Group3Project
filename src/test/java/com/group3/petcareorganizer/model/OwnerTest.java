@@ -9,7 +9,7 @@ public class OwnerTest {
     void testOwnerCreation() {
         Owner owner = new Owner("janki", "password123");
 
-        assertEquals("janki", owner.getOwnerUsername());
+        assertEquals("janki", owner.getUsername());
     }
 
     @Test
@@ -20,6 +20,6 @@ public class OwnerTest {
         owner.addPet(pet);
 
         assertEquals(1, owner.getPets().size());
-        assertEquals("Bella", owner.getPets().get(0).getName());
+        assertEquals("Bella", owner.getPets().get(0).getPetName());
     }
 }

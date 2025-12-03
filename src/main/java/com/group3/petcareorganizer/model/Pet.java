@@ -40,23 +40,21 @@ public class Pet {
     private String petType;
 
     // petAge field is going to hold the pet's age after it has been calculated with getPetAge() method in Pet class
-    private int petAge;
+    //private int petAge;
 
 
-    // @Getter and @Setter get and set healthConcerns
-    // @Lob tells the database that this field can store large text
-    @Getter
-    @Setter
-    @Lob
-    private String healthConcerns;
 
-    /* @ManToOne tells the database that there can be many of this entity belonging to another, in this case, Owner
+    /* @ManToOne tells the database that there can be many pets belonging to an owner, in this case, Owner
         @JoinColumn tells the database to create a column owner_id to identify each Pet entity attached to Owner
      */
-    @Setter
+
     @ManyToOne
     @JoinColumn(name = "owner_id")
     private Owner owner;
+
+    //@OneToOne mapped by pet means one pet can have one pet profile
+    @OneToOne (mappedBy = "pet", cascade = CascadeType.ALL)
+    private PetProfile petProfile;
 
     // Pet constructor for creating an empty pet object, used for Adding a new pet
     public Pet() {}
@@ -74,7 +72,7 @@ public class Pet {
     /* getPetAge() fetches the current date with LocalDate.now(), and uses today to fetch the current year and
         current month to calculate the pets age in years with the pet's birthYear and birthMonth
      */
-    public int getPetAge(){
+    public int getPetAge() {
         LocalDate today = LocalDate.now();
         int currentYear = today.getYear();
         int currentMonth = today.getMonthValue();
@@ -90,6 +88,31 @@ public class Pet {
 
         // Return the pet's age in years
         return years;
+    }
+
+    /* setOwner setter for this pet
+     */
+    public void setOwner(Owner owner){
+        this.owner = owner;
+    }
+
+    /* getOwner fetches the owner of this pet
+     */
+    public Owner getOwner(){
+        return this.owner;
+    }
+
+    /* setProfile connects pet profile and pet to each other
+     */
+    public void setPetProfile(PetProfile petProfile){
+        this.petProfile = petProfile;
+
+        // if the pet profile is not connected to the pet
+        if(petProfile.getPet() != this){
+
+            // connect the pet profile to the pet
+            petProfile.setPet(this);
+        }
     }
 
 

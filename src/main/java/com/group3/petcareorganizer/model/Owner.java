@@ -2,6 +2,7 @@ package com.group3.petcareorganizer.model;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /* @Entity means this class is the owner model for the database, and will be added to a database table
@@ -27,7 +28,17 @@ public class Owner {
     // @OneToMany means that one owner can have many pets in the database, and mappedby "owner" connects the
     // relationship to the owner field in the Pet class
     @OneToMany(mappedBy = "owner")
-    List<Pet> pets;
+    private List<Pet> pets = new ArrayList<>();
+
+    // Constructor for empty Owner object
+    public Owner(){}
+
+    // Constructor for an Owner object with data in the fields: username and password
+    public Owner(String username, String password){
+        this.username = username;
+        this.password = password;
+    }
+
 
 
     // Getters and Setters for each attribute
@@ -61,6 +72,25 @@ public class Owner {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    /* getPets fetches the list of pets that belong to the Owner
+     */
+    public List<Pet> getPets() {
+
+        //returns a list of pet objects
+        return pets;
+    }
+
+    /* addPets adds a pet object to the Owner account,
+        used in junit tests
+     */
+    public void addPet(Pet pet){
+        //add the pet to the list of pets
+        pets.add(pet);
+
+        // sets the Owner of this pet
+        pet.setOwner(this);
     }
 
 }

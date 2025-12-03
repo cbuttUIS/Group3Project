@@ -1,6 +1,16 @@
 package com.group3.petcareorganizer.model;
 
+import jakarta.persistence.*;
+import lombok.Generated;
+import lombok.Getter;
+
+@Entity
 public class Event {
+
+    // generate an id for the Event
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
 
     private String eventName;
     private int eventStartTime;
@@ -9,6 +19,11 @@ public class Event {
     private boolean eventBooked;
     private int eventId;
     private boolean eventEnded;
+
+    // there can be many events to one pet profile
+    @ManyToOne
+    @JoinColumn(name = "pet_profile_id")
+    private PetProfile petProfile;
 
     public Event() {}
 
@@ -74,5 +89,23 @@ public class Event {
 
     public boolean hasEnded() {
         return eventEnded;
+    }
+
+    public PetProfile getPetProfile() {
+        return petProfile;
+    }
+
+    public void setPetProfile(PetProfile petProfile) {
+        this.petProfile = petProfile;
+
+        if(petProfile != null && petProfile.getEventList().contains(this)) {
+            petProfile.getEventList().add(this);
+        }
+
+    }
+
+    public Long getId() {
+        return id;
+
     }
 }

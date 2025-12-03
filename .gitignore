@@ -33,3 +33,4 @@ build/
 .vscode/
 
 
+ExcludedFiles/secrets.yml

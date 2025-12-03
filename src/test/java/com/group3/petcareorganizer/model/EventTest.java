@@ -20,12 +20,14 @@ public class EventTest {
     void testToggleRepeat() {
         Event event = new Event("Checkup", 9, 11, 202);
 
+        boolean beforeToggle = event.isRepeating();
         // toggle repeat should not throw any errors
         event.toggleRepeat();
+        boolean afterToggle = event.isRepeating();
 
         // if you want to test the repeat flag in the future,
         // add a getter like:  event.isRepeating()
         // for now, just ensure nothing crashes:
-        assertNotNull(event);
+        assertNotEquals(beforeToggle, afterToggle);
     }
 }

@@ -3,15 +3,16 @@ package com.group3.petcareorganizer.model;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
+
 public class PetProfileTest {
 
     @Test
-    void testAddAndGetConcern() {
+    void testEditHealthConcerns() {
         Pet pet = new Pet("Bella", 2020, 5, "Dog");
         PetProfile profile = new PetProfile(pet);
 
-        profile.addConcern("Allergy");
-        assertEquals("Allergy", profile.getConcern(0));
+        profile.setHealthConcerns("Allergy");
+        assertEquals("Allergy", profile.getHealthConcerns());
     }
 
     @Test
@@ -22,7 +23,10 @@ public class PetProfileTest {
         Event event = new Event("Vet Visit", 9, 10, 1);
         profile.addEvent(event);
 
-        assertEquals("Vet Visit", profile.getEvent(9).getEventName());
+        assertEquals(1,  profile.getEventList().size());
+        assertEquals("Vet Visit", profile.getEventList().get(0).getEventName());
+        assertEquals(profile, event.getPetProfile());
+
     }
 
     @Test
@@ -32,8 +36,10 @@ public class PetProfileTest {
 
         Event event = new Event("Checkup", 12, 13, 3);
         profile.addEvent(event);
-        profile.deleteEvent(12);
+        assertEquals(1, profile.getEventList().size());
 
-        assertNull(profile.getEvent(12));
+        profile.deleteEvent(event);
+
+        assertEquals(0, profile.getEventList().size());
     }
 }

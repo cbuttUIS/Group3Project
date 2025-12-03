@@ -2,8 +2,7 @@
 FROM maven:3.9.6-eclipse-temurin-17 AS build
 WORKDIR /app
 COPY . .
-RUN mvn clean package -Dmaven.test.skip=true
-
+RUN mvn clean package
 
 # -------- Stage 2: Run the application --------
 FROM eclipse-temurin:17
