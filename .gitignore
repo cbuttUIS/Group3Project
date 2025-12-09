@@ -34,5 +34,5 @@ build/
 
 
 
-
-C:\Users\kiero\IdeaProjects\PetCareApplication\src\main\resources\secrets.yml
+#ignore secrets file
+src/main/resources/secrets.yml
