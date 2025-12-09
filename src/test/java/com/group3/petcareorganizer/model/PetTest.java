@@ -19,7 +19,10 @@ public class PetTest {
     void testCalculateAge() {
         Pet pet = new Pet("Rocky", 2018, 8, "Cat");
 
-        int age = pet.getPetAge();
-        assertEquals(7, age);
+        int currentYear = java.time.LocalDate.now().getYear();
+        int expectedAge = currentYear - 2018; // ignores month for simplicity
+
+        int age = pet.getAge();
+        assertEquals(expectedAge, age);
     }
 }

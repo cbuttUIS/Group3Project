@@ -1,34 +1,102 @@
-
 async function loadPetProfile() {
-
-    //debugging
-    console.log(window.location.href);
-    console.log(window.location.pathname);
-
-    const petId = window.location.pathname.split("/").pop();
-
-    if(!petId || petId == "undefined"){
-        console.error("No pet ID found in URL")
-        return;
-    }
-
-    console.log("Loading pet ID:", petId);
+    const id = window.location.pathname.split("/").pop();
 
 
-    try{
-        const response = await fetch(`/api/pets/${petId}`);
-        const pet = await response.json();
+    try {
+        // Fetch pet info
+        const petResponse = await fetch(`/api/pets/${id}`);
+        const pet = await petResponse.json();
 
+        // Fetch pet profile
+        const profileResponse = await fetch(`/api/pet-profiles/${id}`);
+        const profile = await profileResponse.json();
+
+        // Fetch events for this pet
+        const eventsResponse = await fetch(`/api/pets/${id}/events`);
+        const events = await eventsResponse.json();
+
+        console.log("Loading page for pet ID:", id);
+        console.log('Pet data:', pet);
+        console.log('Pet profile:', profile);
+        console.log('Pet events:', events);
+
+        // Display pet info
         document.getElementById('petName').textContent = pet.petName;
         document.getElementById('petType').textContent = pet.petType;
         document.getElementById('birthYear').textContent = pet.birthYear;
         document.getElementById('birthMonth').textContent = pet.birthMonth;
-        document.getElementById('petAge').textContent = pet.petAge;
-        document.getElementById('healthConcerns').textContent = pet.healthConcerns || 'None';
+        document.getElementById("age").textContent = pet.age;
+
+        // Display health concerns
+        document.getElementById('healthConcerns')
+            .textContent = profile ? profile.healthConcerns || 'None' : 'None';
+
+        renderEvents(events);
 
     } catch (error) {
-        console.error("Error loading pet profile: ", error);
+        console.error("Error loading pet profile:", error);
     }
+
+    deletePet.addEventListener("click", async () => {
+        const id = window.location.pathname.split("/").pop();
+        try {
+            await fetch(`/api/pets/${id}`, { method: "DELETE" });
+            window.location.href = "/dashboard";
+        } catch (error) {
+            console.error("Error deleting pet:", error);
+        }
+    });
+
+
+
+    function renderEvents(events) {
+        const eventsList = document.getElementById('eventsList'); // Match HTML id
+        eventsList.innerHTML = '';
+
+        if (!events || events.length === 0) {
+            eventsList.innerHTML = '<li>No events</li>';
+        } else {
+            events.forEach(event => {
+                const li = document.createElement('li');
+                const start = new Date(event.eventStartTime);
+                const end = new Date(event.eventEndTime);
+                li.textContent = `${event.eventName} — ${formatDateTime(start)} to ${formatDateTime(end)}`;
+                eventsList.appendChild(li);
+            });
+
+        }
+
+    }
+
+    // to enable editing of health concerns
+    // Get references to elements
+    const editBtn = document.getElementById('edit');
+    const saveBtn = document.getElementById('save');
+    const textArea = document.getElementById('healthConcerns');
+    const saveMessage = document.getElementById('saveMessage');
+
+    // Enable editing
+    editBtn.addEventListener('click', () => {
+        textArea.removeAttribute('readonly');
+        editBtn.style.display = 'none';
+        saveBtn.style.display = 'inline-block';
+        saveMessage.textContent = '';
+        textArea.focus(); // optional, puts cursor in textarea
+    });
+
+    // Disable editing and show saved message
+    saveBtn.addEventListener('click', () => {
+        textArea.setAttribute('readonly', 'readonly');
+        editBtn.style.display = 'inline-block';
+        saveBtn.style.display = 'none';
+        saveMessage.textContent = 'Changes saved!';
+    });
+
+
+    function formatDateTime(dt) {
+        return `${dt.getMonth() + 1}/${dt.getDate()}/${dt.getFullYear()} ${dt.getHours()}:${dt.getMinutes().toString().padStart(2, '0')}`;
+    }
+
 }
 
 loadPetProfile();

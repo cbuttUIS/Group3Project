@@ -1,17 +1,16 @@
 package com.group3.petcareorganizer.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /* @Entity means this class is the owner model for the database, and will be added to a database table
-   @Table creates a table in the database for the Owner's information
-   The class is representing an Owner account. It will create a model that store the owner's username, password,
-   email, and a list of the pets that belong to the owner.
+
  */
 @Entity
-@Table
+@Table(name = "owners")
 public class Owner {
 
     // @Id means the id field is the primary key for the database table
@@ -20,14 +19,18 @@ public class Owner {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-
+    //name the column in the database with the username of the account
+    @Column(unique = true)
     private String username;
+
     private String email;
+
     private String password;
 
     // @OneToMany means that one owner can have many pets in the database, and mappedby "owner" connects the
     // relationship to the owner field in the Pet class
-    @OneToMany(mappedBy = "owner")
+    @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
     private List<Pet> pets = new ArrayList<>();
 
     // Constructor for empty Owner object
@@ -82,6 +85,10 @@ public class Owner {
         return pets;
     }
 
+    public void setPets(List<Pet> pets) {
+        this.pets = pets;
+    }
+
     /* addPets adds a pet object to the Owner account,
         used in junit tests
      */
@@ -91,6 +98,12 @@ public class Owner {
 
         // sets the Owner of this pet
         pet.setOwner(this);
+    }
+
+    public void removePet(Pet pet){
+        pets.remove(pet);
+        pet.setOwner(null);
+
     }
 
 }

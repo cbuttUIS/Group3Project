@@ -1,33 +1,42 @@
 package com.group3.petcareorganizer.model;
 
 import org.junit.jupiter.api.Test;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class EventTest {
 
     @Test
     void testEventCreation() {
-        Event event = new Event("Vet Visit", 9, 10, 101);
+
+        LocalDateTime start = LocalDateTime.of(2025,12,15,9,30);
+        LocalDateTime end = LocalDateTime.of(2025,12,15,10,45);
+
+        Event event = new Event("Vet Visit", start, end);
 
         assertEquals("Vet Visit", event.getEventName());
-        assertEquals(9, event.getStartTime());
-        assertEquals(10, event.getEndTime());
-        assertEquals(101, event.getEventId());
+        assertEquals(start, event.getEventStartTime());
+        assertEquals(end, event.getEventEndTime());
         assertFalse(event.isBooked());
+        assertFalse(event.isRepeating());
     }
 
     @Test
     void testToggleRepeat() {
-        Event event = new Event("Checkup", 9, 11, 202);
+
+        LocalDateTime start = LocalDateTime.of(2025,12,15,9,00);
+        LocalDateTime end = LocalDateTime.of(2025,12,15,11,00);
+        Event event = new Event("Checkup", start, end);
 
         boolean beforeToggle = event.isRepeating();
         // toggle repeat should not throw any errors
         event.toggleRepeat();
         boolean afterToggle = event.isRepeating();
 
-        // if you want to test the repeat flag in the future,
-        // add a getter like:  event.isRepeating()
-        // for now, just ensure nothing crashes:
+
         assertNotEquals(beforeToggle, afterToggle);
     }
 }
