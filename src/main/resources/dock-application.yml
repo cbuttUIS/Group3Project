@@ -5,7 +5,8 @@ server:
 
 
 spring:
-
+  config:
+    import: "secrets.yml"
 
   datasource:
     url: ${SPRING_DATASOURCE_URL}
@@ -20,6 +21,18 @@ spring:
       hibernate:
         dialect: org.hibernate.dialect.MySQL8Dialect
         format_sql: true
+
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    #imports username and password from secrets.yml
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+    from: ${spring.mail.username}
 
 logging:
   level:

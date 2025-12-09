@@ -10,6 +10,9 @@ public class OwnerTest {
         Owner owner = new Owner("janki", "password123");
 
         assertEquals("janki", owner.getUsername());
+        assertEquals("password123", owner.getPassword());
+        assertNotNull(owner.getPets());
+        assertEquals(0, owner.getPets().size());
     }
 
     @Test
@@ -21,5 +24,6 @@ public class OwnerTest {
 
         assertEquals(1, owner.getPets().size());
         assertEquals("Bella", owner.getPets().get(0).getPetName());
+        assertEquals(owner, pet.getOwner()); // ensure pet owner is set
     }
 }

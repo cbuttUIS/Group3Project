@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Account Info</title>
+
+    <style>
+        .top-right-button {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            cursor: pointer;
+        }
+    </style>
+    <script src="/js/account-info.js"></script>
+</head>
+<body>
+
+<p><strong>Username: </strong><span id="username"></span></p>
+
+<p><strong>Email: </strong><span id="email"></span></p>
+
+
+<br/><br/>
+
+<button class="top-right-button" onclick="window.location.href='/logout'"> Logout
+
+</button>
+
+<a href="/dashboard"> <button> Back to Dashboard </button></a>
+
+
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add New Pet</title>
+</head>
+<body>
+
+<h1>Add a New Pet</h1>
+
+<form action="/pets/add" method="post" >
+
+    <label>Pet Name:</label>
+    <input type="text" name="petName" required><br/><br/>
+
+    <label>Pet Type:</label>
+    <input type="text" name="petType" required><br/><br/>
+
+    <label>Birth Year:</label>
+    <input type="number" name="birthYear" required><br/><br/>
+
+    <label>Birth Month:</label>
+    <input type="number" name="birthMonth" required><br/><br/>
+
+    <button type="submit"> Add Pet</button>
+
+</form>
+
+<br/>
+<a href="/pets"> <button>Back to Pets</button></a>
+
+</body>
+</html>
