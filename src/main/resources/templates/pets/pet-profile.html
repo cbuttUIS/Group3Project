@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Pet Profile</title>
+
+</head>
+<body>
+
+<h1 id="petName"></h1>
+
+<p><strong>Type: </strong><span id="petType"></span></p>
+<p><strong>Birth Year: </strong><span id="birthYear"></span></p>
+<p><strong>Birth Month: </strong><span id="birthMonth"></span></p>
+<p><strong>Age: </strong><span id="age"></span>  Years</p>
+
+<h3>Health Concerns</h3>
+<textarea id="healthConcerns" readonly rows="5" cols="50">
+Enter any existing health concerns here.
+</textarea>
+<br/>
+
+<!-- Buttons for editing and saving -->
+<button id="edit">Edit</button>
+<button id="save" style="display:none;">Save</button>
+<span id="saveMessage"></span>
+
+
+<h3>Pet Events</h3>
+<ul id="eventsList">
+
+</ul>
+
+<br/>
+<button id="deletePet" >Delete Pet</button>
+
+<br/><br/>
+<a href="/pets">
+    <button>Back to Your Pets</button>
+</a>
+
+<br/><br/>
+<a href="/dashboard">
+    <button>Back to Dashboard</button>
+</a>
+
+<script src="/js/id.js" defer></script>
+</body>
+</html>

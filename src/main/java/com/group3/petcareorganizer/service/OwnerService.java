@@ -1,6 +1,7 @@
 package com.group3.petcareorganizer.service;
 
 import com.group3.petcareorganizer.model.Owner;
+import com.group3.petcareorganizer.model.Pet;
 import com.group3.petcareorganizer.repository.OwnerRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,21 +12,25 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 
 /* @Service means this class is a Spring service, it handles owner operations and authentication
-    @AllArgsConstructor is from Lombok to create constructor for each field in the class
    This class handles operations for the Owner class, it loads the user details for authentication and it provides
    methods to get the logged-in owner's information
 
  */
 @Service
-@AllArgsConstructor
 public class OwnerService implements UserDetailsService {
 
     // ownerRepository is used to access the Owner's data in the database
     private final OwnerRepository ownerRepository;
+
+    //owner service constructor
+    public OwnerService(OwnerRepository ownerRepository) {
+        this.ownerRepository = ownerRepository;
+    }
 
     /* @Override because OwnerService is implementing the UserDetailsService interface and implementing
        loadUserByUsername()
@@ -34,18 +39,13 @@ public class OwnerService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
-        Optional<Owner> user = ownerRepository.findByUsername(username);
-        if (user.isPresent()) {
-
-            var userObj = user.get();
-            return org.springframework.security.core.userdetails.User.builder()
-                    .username(userObj.getUsername())
-                    .password(userObj.getPassword())
-                    .roles("USER")
-                    .build();
-        } else {
-            throw new UsernameNotFoundException(username);
-        }
+        Owner owner = ownerRepository.findByUsername(username)
+                .orElseThrow(() -> new UsernameNotFoundException("Username not found: " + username));
+        return org.springframework.security.core.userdetails.User.builder()
+                .username(owner.getUsername())
+                .password(owner.getPassword())
+                .roles("USER")
+                .build();
     }
 
     /* getCurrentOwner fetches the currently logged-on Owner, it uses SecurityContext to find the authenticated user
@@ -62,5 +62,27 @@ public class OwnerService implements UserDetailsService {
         return ownerRepository.findByUsername(username)
                 .orElseThrow(() -> new UsernameNotFoundException(username));
 
+    }
+
+
+
+    // add pet to the logged in owner
+    public void addPetToOwner(Pet pet){
+        Owner owner = getCurrentOwner();
+        owner.addPet(pet);
+        ownerRepository.save(owner);
+    }
+
+    //get the pets for the logged in owner
+    public List<Pet> getOwnerPets(){
+        return getCurrentOwner().getPets();
+    }
+
+    // fetch a specific pet with the pet ID for the current owner
+    public Pet getPetById(Long petId){
+        return getOwnerPets().stream()
+                .filter(p -> p.getId().equals(petId))
+                .findFirst()
+                .orElse(null);
     }
 }

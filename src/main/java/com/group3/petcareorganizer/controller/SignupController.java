@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 
 @Controller
@@ -24,7 +26,13 @@ public class SignupController {
     /* @PostMapping is to connect the /signup url and handles new sign up form submissions
      */
     @PostMapping(value = "/signup")
-    public String createUser(Owner owner){
+    @ResponseBody
+    public String createOwner(@RequestBody Owner owner){
+
+
+        if (ownerRepository.existsByUsername(owner.getUsername())) {
+            return "redirect:/signup?error=username-taken";
+        }
 
         // Encoding the password
         owner.setPassword(passwordEncoder.encode(owner.getPassword()));
@@ -33,6 +41,6 @@ public class SignupController {
         ownerRepository.save(owner);
 
         // Redirects the user to the login page (/login.html) after saving the new owner/user
-        return "redirect:/login";
+        return "Success";
     }
 }

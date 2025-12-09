@@ -2,6 +2,9 @@ package com.group3.petcareorganizer.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.env.Environment;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -16,6 +19,8 @@ import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import com.group3.petcareorganizer.service.OwnerService;
 import lombok.AllArgsConstructor;
 
+import java.util.Properties;
+
 /* @AllArgsConstructor is used to create constructors with Lombok for each field in this class (
    (OwnerService ownerService uses the Lombok constructor)
    @Configuration means this is a configuration class that will use methods that are annotated with
@@ -23,13 +28,17 @@ import lombok.AllArgsConstructor;
    @EnableWebSecurity means this class uses Spring Security's web security, this class configures the security rules
     for authentication and authorization
  */
-@AllArgsConstructor
+
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
 
     // ownerService will be used to get the owner's details from the database
     private final OwnerService ownerService;
+
+    public SecurityConfig(OwnerService ownerService) {
+        this.ownerService = ownerService;
+    }
 
     /* @Bean means this method will register a Spring Bean so that Spring Security can load the owner's information
         for authentication
@@ -90,8 +99,26 @@ public class SecurityConfig {
                         // All other requests require authentication
                         .requestMatchers("/dashboard/**").authenticated()
                         .anyRequest().authenticated()
+                )
+                .logout(logout -> logout
+                        .logoutUrl("/logout")
+                        .logoutSuccessUrl("/login?logout")
                 );
 
         return http.build();
+    }
+
+    @Bean
+    public JavaMailSender javaMailSender(Environment env) {
+        JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
+        mailSender.setHost(env.getProperty("spring.mail.host"));
+        mailSender.setPort(Integer.parseInt(env.getProperty("spring.mail.port")));
+        mailSender.setUsername(env.getProperty("spring.mail.username"));
+        mailSender.setPassword(env.getProperty("spring.mail.password"));
+
+        Properties props = mailSender.getJavaMailProperties();
+        props.put("mail.smtp.auth", env.getProperty("spring.mail.properties.mail.smtp.auth"));
+        props.put("mail.smtp.starttls.enable", env.getProperty("spring.mail.properties.mail.smtp.starttls.enable"));
+        return mailSender;
     }
 }

@@ -1,10 +1,13 @@
 package com.group3.petcareorganizer.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.Generated;
-import lombok.Getter;
+
+import java.time.LocalDateTime;
 
 @Entity
+@Table (name = "events")
 public class Event {
 
     // generate an id for the Event
@@ -12,71 +15,99 @@ public class Event {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    //name/description of the event
     private String eventName;
-    private int eventStartTime;
-    private int eventEndTime;
+
+    // start time/date of the event
+    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm")
+    private LocalDateTime eventStartTime;
+
+    // end time/date of the event
+    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm")
+    private LocalDateTime eventEndTime;
+
+    // boolean to tag if this is a repeating event
     private boolean eventRepeat;
     private boolean eventBooked;
-    private int eventId;
     private boolean eventEnded;
+
+
+    @ManyToOne
+    @JoinColumn(name="owner_id")
+    @JsonIgnore
+    private Owner owner;
 
     // there can be many events to one pet profile
     @ManyToOne
-    @JoinColumn(name = "pet_profile_id")
-    private PetProfile petProfile;
+    @JoinColumn(name = "pet_id")
+    @JsonIgnore
+    private Pet pet;
 
+    //constructor for an empty Event object
     public Event() {}
 
-    public Event(String name, int startTime, int endTime, int eventId) {
+    // constructor for an Event object that has a name, start time, and end time
+    public Event(String name, LocalDateTime startTime, LocalDateTime endTime) {
         this.eventName = name;
         this.eventStartTime = startTime;
         this.eventEndTime = endTime;
-        this.eventId = eventId;
         this.eventBooked = false;
         this.eventEnded = false;
         this.eventRepeat = false;
     }
 
-    // ---- SETTERS ----
-    public void setName(String name) {
+
+
+    public Long getId() {
+        return id;
+
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setEventName(String name) {
+
         this.eventName = name;
     }
 
-    public void setStartTime(int start) {
-        this.eventStartTime = start;
+    public String getEventName() {
+        return eventName;
     }
 
-    public void setEndTime(int end) {
-        this.eventEndTime = end;
+
+    public LocalDateTime getEventStartTime() {
+        return eventStartTime;
+    }
+
+    public void setEventStartTime(LocalDateTime eventStartTime) {
+        this.eventStartTime = eventStartTime;
+    }
+
+    public LocalDateTime getEventEndTime() {
+        return eventEndTime;
+    }
+
+    public void setEventEndTime(LocalDateTime eventEndTime) {
+        this.eventEndTime = eventEndTime;
+    }
+
+
+    public Pet getPet() {
+        return pet;
+    }
+
+    public void setPet(Pet pet){
+        this.pet = pet;
     }
 
     public void toggleRepeat() {
         this.eventRepeat = !this.eventRepeat;
     }
 
-    public void setEventId(int id) {
-        this.eventId = id;
-    }
-
     public void endEvent() {
         this.eventEnded = true;
-    }
-
-    // ---- GETTERS ----
-    public String getEventName() {
-        return eventName;
-    }
-
-    public int getStartTime() {
-        return eventStartTime;
-    }
-
-    public int getEndTime() {
-        return eventEndTime;
-    }
-
-    public int getEventId() {
-        return eventId;
     }
 
     public boolean isBooked() {
@@ -91,21 +122,5 @@ public class Event {
         return eventEnded;
     }
 
-    public PetProfile getPetProfile() {
-        return petProfile;
-    }
 
-    public void setPetProfile(PetProfile petProfile) {
-        this.petProfile = petProfile;
-
-        if(petProfile != null && petProfile.getEventList().contains(this)) {
-            petProfile.getEventList().add(this);
-        }
-
-    }
-
-    public Long getId() {
-        return id;
-
-    }
 }
