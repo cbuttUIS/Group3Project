@@ -14,28 +14,39 @@ public class PetProfileService {
     //for accessing pet info in the database
     private final PetProfileRepository petProfileRepository;
 
+    private final PetRepository petRepository;
+
     private final OwnerService ownerService;
 
 
     //constructor for PetProfileService
-    public PetProfileService(PetProfileRepository petProfileRepository, OwnerService ownerService) {
+    public PetProfileService(PetProfileRepository petProfileRepository, OwnerService ownerService,
+                             PetRepository petRepository) {
         this.petProfileRepository = petProfileRepository;
         this.ownerService = ownerService;
+        this.petRepository = petRepository;
     }
 
 
     // get the pet's profile with the pet id
-    public PetProfile getPetProfileById(Long petId){
+    public PetProfile getPetProfileById(Long id){
         Owner owner = ownerService.getCurrentOwner();
-        return owner.getPets().stream().filter(p -> p.getId().equals(petId)).map(Pet :: getPetProfile)
+        return owner.getPets().stream().filter(p -> p.getId().equals(id)).map(Pet :: getPetProfile)
                 .findFirst().orElse(null);
     }
 
-    // to edit the health concerns on the pet's profile
-    public PetProfile editHealthConcerns(Long petId, String healthConcerns){
-        PetProfile petProfile = getPetProfileById(petId);
-        petProfile.editHealthConcernNotes(healthConcerns);
-        return petProfileRepository.save(petProfile);
+    public PetProfile updateHealthConcerns(Long petId, String healthConcerns) {
+        Pet pet = petRepository.findById(petId)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid pet id " + petId));
+
+        PetProfile profile = pet.getPetProfile();
+        if (profile == null) {
+            profile = new PetProfile();
+            profile.setPet(pet);
+        }
+
+        profile.setHealthConcerns(healthConcerns);
+        return petProfileRepository.save(profile);
     }
 
     public PetProfile createPetProfile(Pet pet){

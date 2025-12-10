@@ -68,12 +68,13 @@ async function loadPetProfile() {
 
     }
 
-    // to enable editing of health concerns
-    // Get references to elements
+
+    // elements needed to set up health concern editing on profile pagfe
     const editBtn = document.getElementById('edit');
     const saveBtn = document.getElementById('save');
     const textArea = document.getElementById('healthConcerns');
     const saveMessage = document.getElementById('saveMessage');
+
 
     // Enable editing
     editBtn.addEventListener('click', () => {
@@ -81,15 +82,36 @@ async function loadPetProfile() {
         editBtn.style.display = 'none';
         saveBtn.style.display = 'inline-block';
         saveMessage.textContent = '';
-        textArea.focus(); // optional, puts cursor in textarea
+        textArea.focus(); 
     });
 
+
     // Disable editing and show saved message
-    saveBtn.addEventListener('click', () => {
+    saveBtn.addEventListener('click', async () => {
+
+        const id = window.location.pathname.split("/").pop();  // ✔ correct petId
+        const updatedText = textArea.value;
+
+        try {
+            const response = await fetch(`/api/pet-profiles/${id}/health-concerns`, {
+                method: 'PUT',
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ healthConcerns: updatedText })
+            });
+
+            if (!response.ok) {
+                throw new Error("Failed to update health concerns");
+            }
+
+            saveMessage.textContent = "Changes saved!";
+        } catch (error) {
+            console.error(error);
+            saveMessage.textContent = "Error saving changes";
+        }
+
         textArea.setAttribute('readonly', 'readonly');
         editBtn.style.display = 'inline-block';
         saveBtn.style.display = 'none';
-        saveMessage.textContent = 'Changes saved!';
     });
 
 

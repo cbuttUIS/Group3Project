@@ -72,6 +72,13 @@ public class PetRestController {
                 .orElseThrow(() -> new IllegalArgumentException("Invalid pet ID: " + id));
     }
 
+    @DeleteMapping("/{id}")
+    public void deletePet(@PathVariable Long id){
+        Pet pet = petRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid pet ID: " + id));
+        petRepository.delete(pet);
+    }
+
 
     /* to add an event for the pet by finding the pet with pet id
      */

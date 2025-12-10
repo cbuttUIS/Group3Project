@@ -4,10 +4,33 @@
     <meta charset="UTF-8">
     <title>Pet Profile</title>
 
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <style>
+        /*
+        outline of person button
+         */
+        .top-right-button {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+            font-size: 24px;
+        }
+
+    </style>
+
 </head>
 <body>
+<button class="top-right-button" onclick="window.location.href='/account-info'">
+    <ion-icon name="person-outline"></ion-icon>
+</button>
+
 
 <h1 id="petName"></h1>
+<input type="hidden" id="id" />
 
 <p><strong>Type: </strong><span id="petType"></span></p>
 <p><strong>Birth Year: </strong><span id="birthYear"></span></p>
@@ -20,7 +43,7 @@ Enter any existing health concerns here.
 </textarea>
 <br/>
 
-<!-- Buttons for editing and saving -->
+
 <button id="edit">Edit</button>
 <button id="save" style="display:none;">Save</button>
 <span id="saveMessage"></span>
@@ -36,12 +59,12 @@ Enter any existing health concerns here.
 
 <br/><br/>
 <a href="/pets">
-    <button>Back to Your Pets</button>
+    <button>Your Pets</button>
 </a>
 
 <br/><br/>
 <a href="/dashboard">
-    <button>Back to Dashboard</button>
+    <button>Dashboard</button>
 </a>
 
 <script src="/js/id.js" defer></script>

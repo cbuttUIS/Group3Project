@@ -51,17 +51,26 @@ public class PetProfileRestController {
     /* To update the health concerns of a pet, locate the pet with pet id
      */
     @PutMapping("/{id}/health-concerns")
-    public ResponseEntity<PetProfile> updateHealthConcerns(@PathVariable Long id, @RequestBody Map<String, String> requestBody) {
+    public ResponseEntity<PetProfile> updateHealthConcerns(
+            @PathVariable Long id,
+            @RequestBody Map<String, String> requestBody) {
+
         String healthConcerns = requestBody.get("healthConcerns");
 
         Pet pet = petRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid pet id " + id));
 
-        PetProfile petProfile = pet.getPetProfile();
-        petProfile.setHealthConcerns(healthConcerns);
-        petProfileRepository.save(petProfile);
+        PetProfile profile = pet.getPetProfile();
 
-        return ResponseEntity.ok(petProfile);
+        if (profile == null) {
+            profile = new PetProfile();
+            profile.setPet(pet);
+        }
+
+        profile.setHealthConcerns(healthConcerns);
+        petProfileRepository.save(profile);
+
+        return ResponseEntity.ok(profile);
     }
 
 }
