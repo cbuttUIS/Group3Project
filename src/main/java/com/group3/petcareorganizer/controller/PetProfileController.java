@@ -7,6 +7,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
+/* Controller annotation indicates that this is a controller class and will
+ handle incoming requests from users for managing profile info
+ */
 @Controller
 public class PetProfileController {
 

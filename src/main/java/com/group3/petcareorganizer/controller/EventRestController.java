@@ -7,10 +7,14 @@ import com.group3.petcareorganizer.repository.EventRepository;
 import com.group3.petcareorganizer.repository.PetRepository;
 import com.group3.petcareorganizer.service.OwnerService;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 import java.util.stream.Collectors;
 
+/* @RestController means that this class handles API requests and returns information in JSON format (for javascript
+    purposes)
+   @RequestMapping is used to set the endpoints in this controller. All routes start with /api
+    The class is to handle information about the events
+ */
 @RestController
 @RequestMapping("/api")
 public class EventRestController {

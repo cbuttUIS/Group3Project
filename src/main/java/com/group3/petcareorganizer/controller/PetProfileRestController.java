@@ -7,9 +7,13 @@ import com.group3.petcareorganizer.repository.PetProfileRepository;
 import com.group3.petcareorganizer.repository.PetRepository;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.Map;
 
+/* @RestController means that this class handles API requests and returns information in JSON format (for javascript
+    purposes)
+   @RequestMapping is used to set the endpoints in this controller. All routes start with /api/pet-profiles
+    The class is to handle information about the pet profiles
+ */
 @RestController
 @RequestMapping("/api/pet-profiles")
 public class PetProfileRestController {

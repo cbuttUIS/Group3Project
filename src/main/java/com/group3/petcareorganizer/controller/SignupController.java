@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-
+/* Controller annotation indicates that this is a controller class and will
+ handle incoming requests from users for account creation via sign up
+ */
 @Controller
 public class SignupController {
 

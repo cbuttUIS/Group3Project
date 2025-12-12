@@ -11,6 +11,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+/* Controller annotation indicates that this is a controller class and will
+ handle incoming requests from users for pet additions
+ */
 @Controller
 public class PetController {
 
