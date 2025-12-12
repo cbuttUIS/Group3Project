@@ -1,6 +1,5 @@
 package com.group3.petcareorganizer.service;
 
-import com.group3.petcareorganizer.model.Event;
 import com.group3.petcareorganizer.model.Owner;
 import com.group3.petcareorganizer.model.Pet;
 import com.group3.petcareorganizer.model.PetProfile;

@@ -3,43 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <title>Your Pets</title>
-    <script src ="/js/pets.js" defer></script>
+    <script src="/js/pets.js" defer></script>
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
-    <style>
-        /*
-        outline of person button
-         */
-        .top-right-button {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            background-color: transparent;
-            border: none;
-            cursor: pointer;
-            font-size: 24px;
-        }
-
-    </style>
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
+
+<header class="site-header">
+    <img src="/images/pet-logo.png" alt="Pet Logo" class="header-logo">
+    <span class="site-title">Pet Care Organizer</span>
+</header>
 
 <button class="top-right-button" onclick="window.location.href='/account-info'">
     <ion-icon name="person-outline"></ion-icon>
 </button>
 
-<h1>Your Pets</h1>
-<a href="/dashboard"> <button> Back to Dashboard </button></a>
-<br/><br/>
+<section class="page-container">
+    <div class="auth-form">
+        <h1>Your Pets</h1>
 
-<a href="/pets/add-pet"> <button> Add New Pet </button></a>
-<br/><br/>
+        <a href="/dashboard" class="btn">Back to Dashboard</a>
+        <a href="/pets/add-pet" class="btn">Add New Pet</a>
 
-<ul id="pets-list">
+        <ul id="pets-list"></ul>
+    </div>
+</section>
 
-</ul>
-
-
+<footer class="site-footer">
+    Group 3 CSC 478 B
+</footer>
 
 </body>
 </html>

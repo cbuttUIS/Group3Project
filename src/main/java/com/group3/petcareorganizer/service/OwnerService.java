@@ -3,17 +3,14 @@ package com.group3.petcareorganizer.service;
 import com.group3.petcareorganizer.model.Owner;
 import com.group3.petcareorganizer.model.Pet;
 import com.group3.petcareorganizer.repository.OwnerRepository;
-import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
-import java.util.Optional;
+
 
 
 /* @Service means this class is a Spring service, it handles owner operations and authentication

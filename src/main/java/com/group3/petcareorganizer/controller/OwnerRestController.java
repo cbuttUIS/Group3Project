@@ -2,7 +2,6 @@ package com.group3.petcareorganizer.controller;
 
 
 import com.group3.petcareorganizer.model.Owner;
-import com.group3.petcareorganizer.repository.OwnerRepository;
 import com.group3.petcareorganizer.service.OwnerService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

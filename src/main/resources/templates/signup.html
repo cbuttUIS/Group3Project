@@ -3,57 +3,49 @@
 <head>
     <meta charset="UTF-8">
     <title>Sign Up</title>
-
-    <link rel="stylesheet" href="/css/style.css">
     <script src="/js/signup.js" defer></script>
-
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-    <script type="nomodule" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <link rel="stylesheet" href="/css/style.css">
 </head>
-
 <body>
 
 <header class="site-header">
-    Pet Care Organizer
+    <img src="/images/pet-logo.png" alt="Pet Logo" class="header-logo">
+    <span class="site-title">Pet Care Organizer</span>
 </header>
 
-<div class="page-container">
-    <section>
-        <form id="signupForm">
-            <h1>Sign Up</h1>
+<section class="page-container">
+    <form id="signupForm" class="auth-form">
+        <h1>Sign Up</h1>
 
-            <div class="inputbox">
-                <ion-icon name="person-outline"></ion-icon>
-                <input type="text" id="username" name="username" required>
-                <label>Username</label>
-            </div>
+        <div class="inputbox">
+            <label>Username</label>
+            <input type="text" id="username" name="username" required>
+        </div>
 
-            <div class="inputbox">
-                <ion-icon name="mail-outline"></ion-icon>
-                <input type="email" id="email" name="email" required>
-                <label>Email</label>
-            </div>
+        <div class="inputbox">
+            <label>Email</label>
+            <input type="email" id="email" name="email" required>
+        </div>
 
-            <div class="inputbox">
-                <ion-icon name="lock-closed-outline"></ion-icon>
-                <input type="password" id="password" name="password" required>
-                <label>Password</label>
-            </div>
+        <div class="inputbox">
+            <label>Password</label>
+            <input type="password" id="password" name="password" required>
+        </div>
 
-            <div class="inputbox">
-                <ion-icon name="lock-closed-outline"></ion-icon>
-                <input type="password" id="passwordcon" name="passwordcon" required>
-                <label>Confirm Password</label>
-            </div>
+        <div class="inputbox">
+            <label>Confirm Password</label>
+            <input type="password" id="passwordcon" name="passwordcon" required>
+        </div>
 
-            <button type="submit" id="submit">Sign Up</button>
+        <button type="submit" id="submit">Sign Up</button>
 
-            <div class="register" style="margin-top: 10px;">
-                <p>Already have an account? <a href="/login">Log In</a></p>
-            </div>
-        </form>
-    </section>
-</div>
+        <div class="register">
+            Already have an account? <a href="/login" class="btn">Log In</a>
+        </div>
+    </form>
+</section>
 
 <footer class="site-footer">
     Group 3 CSC 478 B

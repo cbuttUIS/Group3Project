@@ -2,44 +2,39 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Log In</title>
+    <title>Login</title>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
     <link rel="stylesheet" href="/css/style.css">
 </head>
-
 <body>
 
 <header class="site-header">
-    Pet Care Organizer
+    <img src="/images/pet-logo.png" alt="Pet Logo" class="header-logo">
+    <span class="site-title">Pet Care Organizer</span>
 </header>
 
-<div class="page-container">
+<section class="page-container">
     <form action="/login" method="post" class="auth-form">
-
-        <!-- Logo Image -->
-        <img src="/images/pet-logo.png"
-             alt="Pet Care Organizer Logo"
-             class="login-logo">
-
         <h1>Log In</h1>
 
         <div class="inputbox">
-            <label for="username">Username</label>
-            <input type="text" id="username" name="username" required>
+            <label>Username</label>
+            <input type="text" name="username" required>
         </div>
 
         <div class="inputbox">
-            <label for="password">Password</label>
-            <input type="password" id="password" name="password" required>
+            <label>Password</label>
+            <input type="password" name="password" required>
         </div>
 
         <button type="submit">Log In</button>
 
-        <p class="register">
-            Don’t have an account? <a href="/signup">Sign Up</a>
-        </p>
-
+        <div class="register">
+            Don’t have an account? <a href="/signup" class="btn">Sign Up</a>
+        </div>
     </form>
-</div>
+</section>
 
 <footer class="site-footer">
     Group 3 CSC 478 B

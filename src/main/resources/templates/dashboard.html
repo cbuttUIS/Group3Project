@@ -2,80 +2,61 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Your Dashboard</title>
-
+    <title>Dashboard</title>
+    <script src="/js/dashboard.js" defer></script>
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
-    <style>
-        /*
-        outline of person button
-         */
-        .top-right-button {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            background-color: transparent;
-            border: none;
-            cursor: pointer;
-            font-size: 24px;
-        }
-
-    </style>
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
+
+<header class="site-header">
+    <img src="/images/pet-logo.png" alt="Pet Logo" class="header-logo">
+    <span class="site-title">Pet Care Organizer</span>
+</header>
 
 <button class="top-right-button" onclick="window.location.href='/account-info'">
     <ion-icon name="person-outline"></ion-icon>
 </button>
 
-<h1>Welcome to Your Dashboard</h1>
+<section class="page-container">
+    <div class="dashboard-form">
+        <h1>Welcome to Your Dashboard</h1>
 
+        <a href="/pets" class="btn">Your Pets</a>
 
+        <h3>Upcoming Events</h3>
+        <ul id="events-list"></ul>
 
+        <h3>Add an Event</h3>
+        <form id="add-event-form" onsubmit="addEvent(event)">
+            <div class="inputbox">
+                <label>Event Name:</label>
+                <input type="text" id="eventName" required>
+            </div>
+            <div class="inputbox">
+                <label>Start Date/Time:</label>
+                <input type="datetime-local" id="eventStart" required>
+            </div>
+            <div class="inputbox">
+                <label>End Date/Time:</label>
+                <input type="datetime-local" id="eventEnd" required>
+            </div>
+            <div class="inputbox">
+                <label>For Which Pet?</label>
+                <select id="eventPetSelect"></select>
+            </div>
 
+            <button type="submit">Add Event</button>
+        </form>
 
-
-<a href="/pets">
-    <button>Your Pets</button>
-</a>
-
-<h3>Upcoming Events</h3>
-<ul id="events-list"></ul>
-
-
-
-<h3>Add an Event</h3>
-<form id="add-event-form" onsubmit="addEvent(event)">
-
-    <label>Event Name:</label>
-    <input type="text" id="eventName" required><br/><br/>
-
-    <label>Start Date/Time:</label>
-    <input type="datetime-local" id="eventStart" required><br/><br/>
-
-    <label>End Date/Time:</label>
-    <input type="datetime-local" id="eventEnd" required><br/><br/>
-
-    <label>For Which Pet?</label>
-    <select id="eventPetSelect"></select><br/><br/>
-
-    <button type="submit">Add Event</button>
-</form>
-
-
-<br/><br/>
-
-<h3>Delete an Event</h3>
-
-<select id="delete-event-selector">
-    <option value="">Select an event...</option>
-</select>
-
-<button onclick="deleteSelectedEvent()">Delete Event</button>
-
-<script src="/js/dashboard.js"></script>
-
-</body>
+        <h3>Delete an Event</h3>
+        <select id="delete-event-selector">
+            <option value="">Select an event...</option>
+        </select>
+        <button onclick="deleteSelectedEvent()">Delete Event</button>
+    </div>
+</section>
 <script>
     /*( Populate the "For Which Pet?" dropdown
 
@@ -102,4 +83,10 @@
     // Call it when the page loads
     document.addEventListener('DOMContentLoaded', populateEventPetSelect);
 </script>
+
+<footer class="site-footer">
+    Group 3 CSC 478 B
+</footer>
+
+</body>
 </html>

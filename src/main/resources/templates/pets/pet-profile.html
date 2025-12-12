@@ -3,70 +3,52 @@
 <head>
     <meta charset="UTF-8">
     <title>Pet Profile</title>
-
+    <script src="/js/id.js" defer></script>
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
-    <style>
-        /*
-        outline of person button
-         */
-        .top-right-button {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            background-color: transparent;
-            border: none;
-            cursor: pointer;
-            font-size: 24px;
-        }
-
-    </style>
-
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
+
+<header class="site-header">
+    <img src="/images/pet-logo.png" alt="Pet Logo" class="header-logo">
+    <span class="site-title">Pet Care Organizer</span>
+</header>
+
 <button class="top-right-button" onclick="window.location.href='/account-info'">
     <ion-icon name="person-outline"></ion-icon>
 </button>
 
+<section class="page-container">
+    <div class="left-form pet-profile-container">
+        <h1 id="petName"></h1>
+        <input type="hidden" id="id" />
 
-<h1 id="petName"></h1>
-<input type="hidden" id="id" />
+        <p><strong>Type: </strong><span id="petType"></span></p>
+        <p><strong>Birth Year: </strong><span id="birthYear"></span></p>
+        <p><strong>Birth Month: </strong><span id="birthMonth"></span></p>
+        <p><strong>Age: </strong><span id="age"></span> Years</p>
 
-<p><strong>Type: </strong><span id="petType"></span></p>
-<p><strong>Birth Year: </strong><span id="birthYear"></span></p>
-<p><strong>Birth Month: </strong><span id="birthMonth"></span></p>
-<p><strong>Age: </strong><span id="age"></span>  Years</p>
+        <h3>Health Concerns</h3>
+        <textarea id="healthConcerns" readonly rows="5"></textarea>
 
-<h3>Health Concerns</h3>
-<textarea id="healthConcerns" readonly rows="5" cols="50">
-Enter any existing health concerns here.
-</textarea>
-<br/>
+        <button id="edit">Edit</button>
+        <button id="save" style="display:none;">Save</button>
+        <span id="saveMessage"></span>
 
+        <h3>Pet Events</h3>
+        <ul id="eventsList"></ul>
 
-<button id="edit">Edit</button>
-<button id="save" style="display:none;">Save</button>
-<span id="saveMessage"></span>
+        <button id="deletePet">Delete Pet</button>
 
+        <a href="/pets" class="btn">Your Pets</a>
+        <a href="/dashboard" class="btn">Dashboard</a>
+    </div>
+</section>
 
-<h3>Pet Events</h3>
-<ul id="eventsList">
+<footer class="site-footer">
+    Group 3 CSC 478 B
+</footer>
 
-</ul>
-
-<br/>
-<button id="deletePet" >Delete Pet</button>
-
-<br/><br/>
-<a href="/pets">
-    <button>Your Pets</button>
-</a>
-
-<br/><br/>
-<a href="/dashboard">
-    <button>Dashboard</button>
-</a>
-
-<script src="/js/id.js" defer></script>
 </body>
 </html>

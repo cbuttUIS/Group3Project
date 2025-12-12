@@ -15,14 +15,12 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
-
 import com.group3.petcareorganizer.service.OwnerService;
-import lombok.AllArgsConstructor;
+
 
 import java.util.Properties;
 
-/* @AllArgsConstructor is used to create constructors with Lombok for each field in this class (
-   (OwnerService ownerService uses the Lombok constructor)
+/*
    @Configuration means this is a configuration class that will use methods that are annotated with
    @Bean to register Spring Beans
    @EnableWebSecurity means this class uses Spring Security's web security, this class configures the security rules
@@ -97,7 +95,7 @@ public class SecurityConfig {
                         // Permit your public pages
                         .requestMatchers("/", "/index", "/login", "/signup").permitAll()
                         // All other requests require authentication
-                        .requestMatchers("/dashboard/**").authenticated()
+                        .requestMatchers("/dashboard/**", "/pets/**", "/account-info").authenticated()
                         .anyRequest().authenticated()
                 )
                 .logout(logout -> logout

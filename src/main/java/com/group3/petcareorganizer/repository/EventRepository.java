@@ -3,7 +3,6 @@ package com.group3.petcareorganizer.repository;
 import com.group3.petcareorganizer.model.Event;
 import com.group3.petcareorganizer.model.Owner;
 import org.springframework.data.jpa.repository.JpaRepository;
-
 import java.time.LocalDateTime;
 import java.util.List;
 
