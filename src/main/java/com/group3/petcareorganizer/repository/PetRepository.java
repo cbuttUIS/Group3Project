@@ -4,7 +4,6 @@ package com.group3.petcareorganizer.repository;
 import com.group3.petcareorganizer.model.Owner;
 import com.group3.petcareorganizer.model.Pet;
 import org.springframework.data.jpa.repository.JpaRepository;
-
 import java.util.List;
 import java.util.Optional;
 

@@ -1,3 +1,5 @@
+
+
 async function loadPetProfile() {
     const id = window.location.pathname.split("/").pop();
 

@@ -5,7 +5,6 @@ import com.group3.petcareorganizer.model.Event;
 import com.group3.petcareorganizer.repository.EventRepository;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
-
 import java.time.LocalDateTime;
 import java.util.List;
 

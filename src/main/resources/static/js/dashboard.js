@@ -1,7 +1,9 @@
-// Load all pets and create dashboard
+
+/* Load all pets and create dashboard
+ */
 async function loadPets() {
     try {
-        const response = await fetch('/api/pets'); // Matches PetRestController
+        const response = await fetch('/api/pets');
 
         if (!response.ok) throw new Error("Failed to load pets");
 
@@ -34,7 +36,8 @@ async function loadPets() {
     }
 }
 
-// loads all event across pets
+/* loads all event across pets
+ */
 async function loadEvents() {
     try {
         const petsResponse = await fetch('/api/pets');
@@ -80,7 +83,8 @@ async function loadEvents() {
 
 
 
-// Add  news event
+/* Add  news event
+ */
 async function addEvent(event) {
     event.preventDefault();
 
@@ -107,7 +111,8 @@ async function addEvent(event) {
     }
 }
 
-// fil dropdown for selecting pets when adding events
+/* fils dropdown for selecting pets when adding events
+ */
 function fillPetSelectForEvents(pets) {
     const select = document.getElementById('eventPetSelect');
 
@@ -125,6 +130,8 @@ function fillPetSelectForEvents(pets) {
         .catch(error => console.error('Error fetching pets:', error));
 }
 
+/* fills the dropdown with events for deleting
+ */
 async function fillDeleteEventDropdown() {
     const selector = document.getElementById('delete-event-selector');
     selector.innerHTML = '<option value="">Select an event...</option>';
@@ -155,7 +162,8 @@ async function fillDeleteEventDropdown() {
     }
 }
 
-// Delete selected event
+/* Delete selected event
+ */
 async function deleteSelectedEvent() {
     const selector = document.getElementById('delete-event-selector');
     const value = selector.value;
@@ -187,12 +195,14 @@ async function deleteSelectedEvent() {
 
 
 
-// Call this on page load
+/* Call this on page load
+ */
 document.addEventListener('DOMContentLoaded', () => {
     populateEventPetSelect();
 });
 
-// Format DateTime for display
+/* Format DateTime for display
+ */
 function formatDateTime(dt) {
     return `${dt.getMonth() + 1}/${dt.getDate()}/${dt.getFullYear()} ${dt.getHours()}:${dt.getMinutes().toString().padStart(2, '0')}`;
 }

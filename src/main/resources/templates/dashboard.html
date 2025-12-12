@@ -76,30 +76,5 @@
 <script src="/js/dashboard.js"></script>
 
 </body>
-<script>
-    /*( Populate the "For Which Pet?" dropdown
 
-     */
-    function populateEventPetSelect() {
-        const select = document.getElementById('eventPetSelect');
-
-        fetch('/api/pets')
-            .then(response => response.json())
-            .then(pets => {
-                select.innerHTML = ''; // clear old options
-                pets.forEach(pet => {
-                    const option = document.createElement('option');
-                    option.value = pet.id;
-                    option.textContent = pet.petName;
-                    select.appendChild(option);
-                });
-
-
-            })
-            .catch(error => console.error('Error fetching pets:', error));
-    }
-
-    // Call it when the page loads
-    document.addEventListener('DOMContentLoaded', populateEventPetSelect);
-</script>
 </html>
