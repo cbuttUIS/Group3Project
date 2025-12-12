@@ -1,0 +1,67 @@
+/* ===== Shared Layout ===== */
+
+header.site-header {
+    position: fixed;
+    top: 15px;
+    left: 20px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+/* Page center */
+.page-container {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 80px 20px 60px;
+}
+
+/* Form */
+.auth-form {
+    width: 320px;
+    text-align: center;
+}
+
+.auth-form h1 {
+    margin-bottom: 20px;
+}
+
+/* Inputs */
+.inputbox {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    margin-bottom: 15px;
+}
+
+.inputbox label {
+    margin-bottom: 5px;
+    font-size: 14px;
+}
+
+.inputbox input {
+    padding: 8px;
+}
+
+/* Center button */
+.auth-form button {
+    display: block;
+    margin: 15px auto;
+    padding: 8px 15px;
+}
+
+/* Center register text */
+.register {
+    text-align: center;
+    margin-top: 10px;
+}
+
+/* Footer */
+footer.site-footer {
+    position: fixed;
+    bottom: 10px;
+    width: 100%;
+    text-align: center;
+    font-size: 14px;
+}
