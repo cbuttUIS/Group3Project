@@ -1,12 +1,10 @@
 server:
+  port: ${PORT:8080}
   error:
     include-message: always
     include-binding-errors: always
 
-
 spring:
-  config:
-    import: "secrets.yml"
 
   datasource:
     url: ${SPRING_DATASOURCE_URL}
@@ -25,14 +23,15 @@ spring:
   mail:
     host: smtp.gmail.com
     port: 587
-    #imports username and password from secrets.yml
+    username: ${SPRING_MAIL_USERNAME}
+    password: ${SPRING_MAIL_PASSWORD}
     properties:
       mail:
         smtp:
           auth: true
           starttls:
             enable: true
-    from: ${spring.mail.username}
+    from: ${SPRING_MAIL_USERNAME}
 
 logging:
   level:
