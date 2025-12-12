@@ -9,9 +9,9 @@ header.site-header {
     z-index: 1000;
 }
 
-/* Page center (NO SCROLLBAR FIX) */
+/* Page center (no vertical scrollbar) */
 .page-container {
-    height: calc(100vh - 140px); /* 80px header + 60px footer */
+    height: calc(100vh - 140px); /* header + footer space */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -25,6 +25,13 @@ header.site-header {
     text-align: center;
 }
 
+/* Logo image */
+.login-logo {
+    width: 120px;
+    margin-bottom: 15px;
+}
+
+/* Title */
 .auth-form h1 {
     margin-bottom: 20px;
 }
@@ -46,7 +53,7 @@ header.site-header {
     padding: 8px;
 }
 
-/* Center button */
+/* Button */
 .auth-form button {
     display: block;
     margin: 15px auto;
@@ -54,7 +61,7 @@ header.site-header {
     cursor: pointer;
 }
 
-/* Center register text */
+/* Register text */
 .register {
     text-align: center;
     margin-top: 10px;
