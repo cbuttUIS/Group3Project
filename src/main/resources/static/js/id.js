@@ -52,7 +52,7 @@ async function loadPetProfile() {
 
 
     function renderEvents(events) {
-        const eventsList = document.getElementById('eventsList'); // Match HTML id
+        const eventsList = document.getElementById('eventsList');
         eventsList.innerHTML = '';
 
         if (!events || events.length === 0) {
@@ -91,7 +91,7 @@ async function loadPetProfile() {
     // Disable editing and show saved message
     saveBtn.addEventListener('click', async () => {
 
-        const id = window.location.pathname.split("/").pop();  // ✔ correct petId
+        const id = window.location.pathname.split("/").pop();
         const updatedText = textArea.value;
 
         try {

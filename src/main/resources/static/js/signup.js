@@ -36,11 +36,4 @@ document.addEventListener('DOMContentLoaded', () => {
             alert("Signup error, check console.");
         }
     });
-
-    // fade in animation, can be removed
-    signupForm.style.opacity = 0;
-    setTimeout(() => {
-        signupForm.style.transition = 'opacity 1s ease-in-out';
-        signupForm.style.opacity = 1;
-    }, 500);
 });

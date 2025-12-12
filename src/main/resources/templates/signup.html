@@ -2,40 +2,54 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Signup</title>
+    <title>Sign Up</title>
     <script src="/js/signup.js" defer></script>
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-    <script type="nomodule" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
-<section>
-    <form id="signupForm">
+
+<header class="site-header">
+    <img src="/images/pet-logo.png" alt="Pet Logo" class="header-logo">
+    <span class="site-title">Pet Care Organizer</span>
+</header>
+
+<section class="page-container">
+    <form id="signupForm" class="auth-form">
         <h1>Sign Up</h1>
+
         <div class="inputbox">
-            <ion-icon name="person-outline"></ion-icon>
-            <input type="text" id="username" name="username" required>
             <label>Username</label>
+            <input type="text" id="username" name="username" required>
         </div>
+
         <div class="inputbox">
-            <ion-icon name="mail-outline"></ion-icon>
-            <input type="email" id="email" name="email" required>
             <label>Email</label>
+            <input type="email" id="email" name="email" required>
         </div>
+
         <div class="inputbox">
-            <ion-icon name="lock-closed-outline"></ion-icon>
-            <input type="password" id="password" name="password" required>
             <label>Password</label>
+            <input type="password" id="password" name="password" required>
         </div>
+
         <div class="inputbox">
-            <ion-icon name="lock-closed-outline"></ion-icon>
-            <input type="password" id="passwordcon" name="passwordcon" required>
             <label>Confirm Password</label>
+            <input type="password" id="passwordcon" name="passwordcon" required>
         </div>
+
         <button type="submit" id="submit">Sign Up</button>
+
         <div class="register">
-            <p>Already have an account? <a href="/login">Log In</a></p>
+            Already have an account? <a href="/login" class="btn">Log In</a>
         </div>
     </form>
 </section>
+
+<footer class="site-footer">
+    Group 3 CSC 478 B
+</footer>
+
 </body>
 </html>

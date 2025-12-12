@@ -4,35 +4,41 @@
     <meta charset="UTF-8">
     <title>Login</title>
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-    <script type="nomodule" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
-
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <link rel="stylesheet" href="/css/style.css">
 </head>
-
 <body>
-<section>
-    <form action="/login" method="post">
+
+<header class="site-header">
+    <img src="/images/pet-logo.png" alt="Pet Logo" class="header-logo">
+    <span class="site-title">Pet Care Organizer</span>
+</header>
+
+<section class="page-container">
+    <form action="/login" method="post" class="auth-form">
         <h1>Log In</h1>
 
-        <div class = "inputbox">
-            <ion-icon name="person-outline"></ion-icon>
-            <input type = "text" name = "username" required>
-            <label>Userame</label>
+        <div class="inputbox">
+            <label>Username</label>
+            <input type="text" name="username" required>
         </div>
 
         <div class="inputbox">
-            <ion-icon name="lock-closed-outline"></ion-icon>
-            <input type="password" name="password" required>
             <label>Password</label>
+            <input type="password" name="password" required>
         </div>
 
         <button type="submit">Log In</button>
 
-
+        <div class="register">
+            Don’t have an account? <a href="/signup" class="btn">Sign Up</a>
+        </div>
     </form>
-
-    <div class="register">
-        <p>Don’t have an account? <a href="/signup"><button >Sign Up</button></a></p>
-    </div>
 </section>
+
+<footer class="site-footer">
+    Group 3 CSC 478 B
+</footer>
+
 </body>
 </html>

@@ -3,35 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <title>Account Info</title>
-
-    <style>
-        .top-right-button {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            cursor: pointer;
-        }
-    </style>
-    <script src="/js/account-info.js"></script>
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="/js/account-info.js" defer></script>
 </head>
 <body>
 
-<p><strong>Username: </strong><span id="username"></span></p>
+<header class="site-header">
+    <img src="/images/pet-logo.png" alt="Pet Logo" class="header-logo">
+    <span class="site-title">Pet Care Organizer</span>
+</header>
 
-<p><strong>Email: </strong><span id="email"></span></p>
-
-
-<br/><br/>
-
-<button class="top-right-button" onclick="window.location.href='/logout'"> Logout
-
+<button class="top-right-button" onclick="window.location.href='/logout'">
+    Logout
 </button>
-<a href="/pets"> <button> Your Pets</button>
-</a>
 
-<br/><br/>
-<a href="/dashboard"> <button> Dashboard </button></a>
+<section class="page-container">
+    <div class="left-form">
+        <p><strong>Username: </strong><span id="username"></span></p>
+        <p><strong>Email: </strong><span id="email"></span></p>
 
+        <a href="/pets" class="btn">Your Pets</a>
+        <a href="/dashboard" class="btn">Dashboard</a>
+    </div>
+</section>
+
+<footer class="site-footer">
+    Group 3 CSC 478 B
+</footer>
 
 </body>
 </html>
