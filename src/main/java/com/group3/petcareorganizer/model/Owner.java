@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /* @Entity means this class is the owner model for the database, and will be added to a database table
-
+    model class that defines the attributes and methods of owner
  */
 @Entity
 @Table(name = "owners")

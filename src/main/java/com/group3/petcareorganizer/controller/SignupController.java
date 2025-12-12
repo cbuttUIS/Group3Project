@@ -1,7 +1,5 @@
 package com.group3.petcareorganizer.controller;
 
-
-
 import com.group3.petcareorganizer.model.Owner;
 import com.group3.petcareorganizer.repository.OwnerRepository;
 import org.springframework.beans.factory.annotation.Autowired;

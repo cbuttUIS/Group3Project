@@ -3,7 +3,9 @@ package com.group3.petcareorganizer.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
-
+/* @Entity means this class is the pet profile model for the database, and will be added to a database
+    model class that defines the attributes and methods of pet profile
+ */
 @Entity
 public class PetProfile {
 
@@ -24,10 +26,12 @@ public class PetProfile {
     private Pet pet;
 
 
-    //create an empty PetProfile object
+    /*create an empty PetProfile object
+     */
     public PetProfile() {}
 
-    // create a pet profile for the pet and bind it to the pet
+    /* create a pet profile for the pet and bind it to the pet
+     */
     public PetProfile(Pet pet) {
         setPet(pet);
 
@@ -41,11 +45,14 @@ public class PetProfile {
         return id;
     }
 
-
+    /* getter for healthconcerns
+     */
     public String getHealthConcerns() {
         return healthConcerns;
     }
 
+    /* setter for healthconcerns
+     */
     public void setHealthConcerns(String healthConcerns) {
         this.healthConcerns = healthConcerns;
     }

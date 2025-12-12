@@ -11,7 +11,7 @@ import java.util.Map;
 
 /* @RestController means that this class handles API requests and returns information in JSON format (for javascript
     purposes)
-   @RequestMapping is used to set the endpoints in this controller. All routes start with /api/pet-profiles
+   @RequestMapping is used to set the endpoints in this controller.
     The class is to handle information about the pet profiles
  */
 @RestController
@@ -38,16 +38,12 @@ public class PetProfileRestController {
        // locate the pet in the database, or throw exception if pet doesn't exist
         Pet pet = petRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid pet id " +id));
-
         PetProfile petProfile = pet.getPetProfile();
-
         // if no profile exists, return an empty one
         if (petProfile == null) {
             petProfile = new PetProfile();
         }
-
         pet.getEvents().size();
-        // return the profile with the pet and event info included
         return petProfile;
 
     }

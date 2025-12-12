@@ -17,22 +17,29 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 public class PetController {
 
-
+    // access pet data
     private final PetRepository petRepository;
+    //access owner services
     private final OwnerService ownerService;
 
+    /* constructor for pet controller
+     */
     @Autowired
     public PetController(PetRepository petRepository, OwnerService ownerService) {
         this.petRepository = petRepository;
         this.ownerService = ownerService;
     }
 
+    /*gets the add pet form and its url
+     */
     @GetMapping("/pets/add-pet")
     public String addPetForm(Model model) {
         model.addAttribute("pet", new Pet());
         return "pets/add-pet";
     }
 
+    /*posts the added pet to the pets list
+     */
     @PostMapping("/pets/add")
     public String savePet(@ModelAttribute Pet pet) {
         Owner owner = ownerService.getCurrentOwner();

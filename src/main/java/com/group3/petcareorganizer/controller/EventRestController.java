@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 
 /* @RestController means that this class handles API requests and returns information in JSON format (for javascript
     purposes)
-   @RequestMapping is used to set the endpoints in this controller. All routes start with /api
+   @RequestMapping is used to set the endpoints in this controller.
     The class is to handle information about the events
  */
 @RestController

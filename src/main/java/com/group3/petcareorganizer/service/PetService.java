@@ -6,9 +6,10 @@ import com.group3.petcareorganizer.model.Pet;
 import com.group3.petcareorganizer.model.PetProfile;
 import com.group3.petcareorganizer.repository.PetRepository;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 
+/* @Service means this class is a Spring service, it handles pet operations for managing the pet objects
+ */
 @Service
 public class PetService {
 
@@ -23,7 +24,8 @@ public class PetService {
         this.ownerService = ownerService;
     }
 
-    //add a pet for the logged in owner
+    /*add a pet for the logged in owner
+     */
     public Pet addPet(Pet pet) {
         Owner owner = ownerService.getCurrentOwner();
        //add the pet to the owner
@@ -34,18 +36,21 @@ public class PetService {
     }
 
 
-    // get a list of all the owner's pets
+    /* get a list of all the owner's pets
+     */
     public List<Pet> getOwnerPets(){
         Owner owner = ownerService.getCurrentOwner();
         return owner.getPets();
     }
 
-    //get a specific pet of the owner's
+    /*9get a specific pet of the owner's
+     */
     public Pet getPetById(Long id){
         return getOwnerPets().stream().filter(pet -> pet.getId().equals(id)).findFirst().orElse(null);
     }
 
-    // delete a pet of the owner's
+    /*delete a pet of the owner's
+     */
     public void deletePet(Long id){
         Pet pet = getPetById(id);
         // check the pet exists to delete them
@@ -54,7 +59,8 @@ public class PetService {
         }
     }
 
-    // get the pets profile using the pet id
+    /* get the pets profile using the pet id
+     */
     public PetProfile getPetProfileById(Long id){
         Pet pet = getPetById(id);
         // if the pet exists return their profile
@@ -65,7 +71,8 @@ public class PetService {
         return null;
     }
 
-    // add an event to the pet's events and save the info to the databse if the pet exists
+    /* add an event to the pet's events and save the info to the databse if the pet exists
+     */
     public Event addEvent(Long id, Event event){
         Pet pet =  getPetById(id);
         if(pet != null){
@@ -77,7 +84,8 @@ public class PetService {
         return null;
     }
 
-    // get all the events for this pet unless they are null because the pet doesnt exist
+    /* get all the events for this pet unless they are null because the pet doesnt exist
+     */
     public List<Event> getEvents(Long id){
         Pet pet = getPetById(id);
         if(pet != null){
@@ -97,7 +105,5 @@ public class PetService {
             petRepository.save(pet);
         }
     }
-
-
 
 }

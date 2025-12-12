@@ -12,14 +12,17 @@ import org.springframework.web.bind.annotation.PathVariable;
  */
 @Controller
 public class PetProfileController {
-
+    // access pet data
     private final PetRepository petRepository;
 
+    /* constructor for pet profile controller
+     */
     public PetProfileController(PetRepository petRepository) {
         this.petRepository = petRepository;
     }
 
-
+    /* gets the pet profile to view and its url
+     */
     @GetMapping("/pets/{id}")
     public String viewPetProfile(@PathVariable Long id, Model model) {
 

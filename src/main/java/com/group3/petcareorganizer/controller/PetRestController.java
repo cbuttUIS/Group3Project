@@ -16,7 +16,7 @@ import java.util.List;
 
 /* @RestController means that this class handles API requests and returns information in JSON format (for javascript
     purposes)
-   @RequestMapping is used to set the endpoints in this controller. All routes start with /api/pets
+   @RequestMapping is used to set the endpoints in this controller.
     The class is to handle information about the pets
  */
 @RestController
@@ -32,9 +32,9 @@ public class PetRestController {
     //to use the owner services
     private final OwnerService ownerService;
 
-    @Autowired
-    /* PetRestController constructor is used to give database access to this controller
+    /* PetRestController constructor
      */
+    @Autowired
     public PetRestController(PetRepository petRepository, OwnerService ownerService, EventRepository eventRepository,
                              PetService petService) {
         this.petRepository = petRepository;
@@ -72,6 +72,8 @@ public class PetRestController {
                 .orElseThrow(() -> new IllegalArgumentException("Invalid pet ID: " + id));
     }
 
+    /* deletes the pet from the mapped id
+     */
     @DeleteMapping("/{id}")
     public void deletePet(@PathVariable Long id){
         Pet pet = petRepository.findById(id)
@@ -79,8 +81,7 @@ public class PetRestController {
         petRepository.delete(pet);
     }
 
-
-    /* to add an event for the pet by finding the pet with pet id
+    /* to pos an added event for the pet by finding the pet with pet id
      */
     @PostMapping("/{id}/events")
     public Event addEvent(@PathVariable Long id, @RequestBody Event event){
@@ -91,7 +92,8 @@ public class PetRestController {
         return eventRepository.save(event);
     }
 
-    // find the pet with the pet id and get all the pets events
+    /* find the pet with the pet id and get all the pets events
+     */
     @GetMapping("/{id}/events")
     public List<Event> getEvents(@PathVariable Long id){
         Pet pet = petRepository.findById(id)
@@ -99,6 +101,8 @@ public class PetRestController {
         return pet.getEvents();
     }
 
+    /* deletes the event from the mapped id using the pets id and events id to find the event
+     */
     @DeleteMapping("/api/pets/{id}/events/{eventId}")
     public ResponseEntity<Void> deleteEvent(@PathVariable Long id,
                                             @PathVariable Long eventId) {

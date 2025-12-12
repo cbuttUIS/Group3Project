@@ -9,8 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-/*
-@Entity means this class is the Pet model for the database
+/* @Entity means this class is the pet model for the database, and will be added to a database
+    model class that defines the attributes and methods of pet
  */
 @Entity
 @Table(name = "pets")
@@ -23,20 +23,11 @@ public class Pet {
     private Long id;
 
 
-    // @Getter and @Setter to get and set petName, birthYear (YYYY), birthMonth (MM), and petType
-
+    // pet's name, birth year (YYYY), birth month (MM), and type
     private String petName;
-
     private int birthYear;
-
     private int birthMonth;
-
     private String petType;
-
-
-
-    // petAge field is going to hold the pet's age after it has been calculated with getPetAge() method in Pet class
-    //private int petAge;
 
 
 
@@ -52,13 +43,14 @@ public class Pet {
     @OneToOne (mappedBy = "pet", cascade = CascadeType.ALL, orphanRemoval = true)
     private PetProfile petProfile;
 
-
+    // one pet can have many events
     @OneToMany(mappedBy = "pet", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonIgnore
     private List<Event> events = new ArrayList<>();
 
 
-    // Pet constructor for creating an empty pet object, used for Adding a new pet
+    /* Pet constructor for creating an empty pet object, used for Adding a new pet
+     */
     public Pet() {}
 
     /* Pet constructor to return a Pet object with data in the attribute fields
@@ -72,50 +64,67 @@ public class Pet {
 
     }
 
-
+    /* getter for pet id
+     */
     public Long getId() {
         return id;
     }
 
+    /* setter for pet id
+     */
     public void setId(Long id) {
         this.id = id;
     }
 
-
+    /* getter for pet name
+     */
     public String getPetName(){
         return petName;
     }
 
+    /* setter for pet name
+     */
     public void setPetName(String name){
         this.petName = name;
     }
 
+    /* getter for pet's birth year
+     */
     public int getBirthYear() {
         return birthYear;
     }
+
+    /* setter for this pet's birht yeat
+     */
     public void setBirthYear(int birthYear) {
         this.birthYear = birthYear;
     }
 
+    /* getter for pet's birth month
+     */
     public int getBirthMonth() {
         return birthMonth;
     }
 
+    /* setter for this pet's birth month
+     */
     public void setBirthMonth(int birthMonth) {
         this.birthMonth = birthMonth;
     }
 
+    /* getter for pet type
+     */
     public String getPetType() {
         return petType;
     }
 
+    /* setter for pet's type of animal
+     */
     public void setPetType(String petType) {
         this.petType = petType;
     }
 
-
-
-    /* setOwner setter for this pet
+    /* setter for this pet's owner
      */
     public void setOwner(Owner owner){
         this.owner = owner;
@@ -127,6 +136,8 @@ public class Pet {
         return this.owner;
     }
 
+    /* getter for pet's events
+     */
     public List<Event> getEvents() {
         return events;
     }
@@ -140,7 +151,8 @@ public class Pet {
         event.setPet(this);
     }
 
-
+    /* getter for pet's profile
+     */
     public PetProfile getPetProfile() {
         return this.petProfile;
     }
@@ -160,11 +172,8 @@ public class Pet {
         }
     }
 
-
-
     /* getPetAge() fetches the current date with LocalDate.now(), and uses today to fetch the current year and
         current month to calculate the pets age in years with the pet's birthYear and birthMonth
-
      */
     @JsonProperty("age")
     public int getAge() {

@@ -78,6 +78,8 @@ public class DashboardRestController {
         return eventRepository.save(event);
     }
 
+    /* deletes the event given
+     */
     @DeleteMapping("/api/pets/{id}/events/{eventId}")
     public ResponseEntity<Void> deleteEvent(@PathVariable Long id,
                                             @PathVariable Long eventId) {

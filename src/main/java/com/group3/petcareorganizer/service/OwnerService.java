@@ -16,7 +16,6 @@ import java.util.List;
 /* @Service means this class is a Spring service, it handles owner operations and authentication
    This class handles operations for the Owner class, it loads the user details for authentication and it provides
    methods to get the logged-in owner's information
-
  */
 @Service
 public class OwnerService implements UserDetailsService {
@@ -24,7 +23,8 @@ public class OwnerService implements UserDetailsService {
     // ownerRepository is used to access the Owner's data in the database
     private final OwnerRepository ownerRepository;
 
-    //owner service constructor
+    /*owner service constructor
+     */
     public OwnerService(OwnerRepository ownerRepository) {
         this.ownerRepository = ownerRepository;
     }

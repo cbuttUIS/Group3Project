@@ -6,6 +6,9 @@ import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
 
+/* @Entity means this class is the event model for the database, and will be added to a database
+    model class that defines the attributes and methods of event
+ */
 @Entity
 @Table (name = "events")
 public class Event {
@@ -57,7 +60,7 @@ public class Event {
     }
 
 
-
+   // getters and setters for class attributes
     public Long getId() {
         return id;
 

@@ -8,18 +8,26 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.util.List;
 
+/* @Service means this class is a Spring service, it handles event operations, and sends event notifications with email
+ */
 @Service
 public class EventService {
 
+    // access event data
     private final EventRepository eventRepository;
 
+    //access email service
     private final EmailService emailService;
 
+    /* event constructor
+     */
     public EventService(EventRepository eventRepository, EmailService emailService) {
         this.eventRepository = eventRepository;
         this.emailService = emailService;
     }
 
+    /* sets when email notifs are sent and hor they are formatted
+     */
     @Scheduled (fixedRate = 60 * 1000) //runs every min
     public void sendReminders() {
         LocalDateTime now = LocalDateTime.now();

@@ -76,7 +76,8 @@ public class SecurityConfig {
 
     /* @Bean means this method registers a Spring Bean to configure the securityFilterChain for the application
         using Spring Security
-       This method disables csrf protection, sets up the login page for authentication and redirects to the dashboard
+       This method disables csrf protection (would not use in real world scenario unless only during development)
+       , sets up the login page for authentication and redirects to the dashboard
        after successful login.
        The method also permits requests to static resources and defines which urls are public and which are private
      */
@@ -106,6 +107,8 @@ public class SecurityConfig {
         return http.build();
     }
 
+    /* configures emailing with JavaMailSender
+     */
     @Bean
     public JavaMailSender javaMailSender(Environment env) {
         JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
