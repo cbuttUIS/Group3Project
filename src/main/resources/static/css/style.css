@@ -6,15 +6,17 @@ header.site-header {
     left: 20px;
     font-size: 20px;
     font-weight: bold;
+    z-index: 1000;
 }
 
-/* Page center */
+/* Page center (NO SCROLLBAR FIX) */
 .page-container {
-    min-height: 100vh;
+    height: calc(100vh - 140px); /* 80px header + 60px footer */
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 80px 20px 60px;
+    padding: 0 20px;
+    box-sizing: border-box;
 }
 
 /* Form */
@@ -49,6 +51,7 @@ header.site-header {
     display: block;
     margin: 15px auto;
     padding: 8px 15px;
+    cursor: pointer;
 }
 
 /* Center register text */
@@ -64,4 +67,5 @@ footer.site-footer {
     width: 100%;
     text-align: center;
     font-size: 14px;
+    z-index: 1000;
 }
