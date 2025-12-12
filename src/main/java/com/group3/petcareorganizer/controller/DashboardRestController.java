@@ -9,13 +9,15 @@ import com.group3.petcareorganizer.service.OwnerService;
 import com.group3.petcareorganizer.service.PetService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+/* @RestController means that this class handles API requests and returns information in JSON format (for javascript
+    purposes)
+ */
 @RestController
 public class DashboardRestController {
 
@@ -41,8 +43,6 @@ public class DashboardRestController {
         this.petService = petService;
 
     }
-
-
 
     /* create the owner dashboard
      */
