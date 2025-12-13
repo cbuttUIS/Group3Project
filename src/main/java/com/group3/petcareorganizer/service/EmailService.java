@@ -1,6 +1,7 @@
 package com.group3.petcareorganizer.service;
 
 
+import org.springframework.mail.MailException;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
@@ -26,7 +27,12 @@ public class EmailService {
         message.setTo(to);
         message.setSubject(subject);
         message.setText(body);
-        mailSender.send(message);
+        try{
+            mailSender.send(message);
+        } catch(MailException ex){
+            ex.printStackTrace();
+        }
+
     }
 
 }
